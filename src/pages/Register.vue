@@ -19,7 +19,7 @@
           <input class="gruop-input" id="password" type="password" placeholder="请设置登录密码">
         </div>
         <div class="group submit">
-          <button class="default">立即注册</button>
+          <button class="btn default" @click="submit">立即注册</button>
         </div>
       </div>
       <div class="footer" slot="footer">
@@ -33,6 +33,11 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    submit(){
+      this.$router.push({ path: '/login' })
+    }
   }
 };
 </script>

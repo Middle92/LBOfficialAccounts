@@ -11,7 +11,7 @@
             <span>join in</span>
           </div>
           <span class="bg-text">join in</span>
-          <img src="@/assets/icon01.png" alt="">
+          <img src="@/assets/imgs/icon01.png" alt="">
         </div>
         <div class="choose blue" @click="werben">
           <div class="choose-text">
@@ -19,7 +19,7 @@
             <span>werben</span>
           </div>
           <span class="bg-text">werben</span>
-          <img src="@/assets/icon02.png" alt="">
+          <img src="@/assets/imgs/icon02.png" alt="">
         </div>
       </div>
       <footer-component text="填写资料后，平台会和您进行线下联系，请保持电话畅通"/>
@@ -44,31 +44,32 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  padding: 0 1rem;
+  padding: 0 rem(37.5);
   position: relative;
   height: 100%;
   float: left;
   .title {
-    font-size: 0.61rem;
-    color: RGBA(51, 51, 51, 1);
-    margin-top: 0.69rem;
-    margin-bottom: 1.06rem;
+    font-size: rem(23);
+    color: $default-color;
+    margin-top: rem(25);
+    margin-bottom: rem(40);
     span {
       display: block;
-      font-size: 0.32rem;
-      color: RGBA(153, 153, 153, 1);
-      margin-top: 0.26rem;
+      font-size: rem(12);
+      color: $border-color;
+      margin-top: rem(10);
     }
   }
   .choose {
-    width: 8rem;
-    height: 2.66rem;
+    width: rem(300);
+    height: rem(100);
     display: flex;
     align-items: center;
-    padding: 0 0.53rem;
+    padding: 0 rem(20);
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: rem(5);
     position: relative;
+    box-shadow: $default-shadow-style;
     &.green {
       background: linear-gradient(to top right, RGBA(2, 226, 178, 1), RGBA(1, 174, 247, 1));
     }
@@ -76,7 +77,7 @@ export default {
       background: linear-gradient(to top right, RGBA(0, 133, 255, 1), RGBA(1, 174, 247, 1));
     }
     &:not(:last-child) {
-      margin-bottom: 1.46rem;
+      margin-bottom: rem(62);
     }
     &:active {
       transform: scale(.9);
@@ -84,12 +85,12 @@ export default {
     }
     .choose-text {
       flex: 1;
-      font-size: .4rem;
+      font-size: rem(15);
       color: #fff;
       span {
         display: block;
-        font-size: 0.32rem;
-        margin-top: 0.26rem;
+        font-size: rem(12);
+        margin-top: rem(10);
         text-transform: uppercase;
       }
     }
@@ -97,13 +98,13 @@ export default {
       text-transform: uppercase;
       font-weight: 600;
       position: absolute;
-      font-size: 0.53rem;
-      right: 2.53rem;
-      color: RGBA(255, 255, 255, .2)
+      font-size: rem(20);
+      right: rem(100);
+      color: $background-text-color;
     }
     img {
-      width: 2rem;
-      height: 2rem;
+      width: rem(75);
+      height: rem(75);
     }
   }
 }

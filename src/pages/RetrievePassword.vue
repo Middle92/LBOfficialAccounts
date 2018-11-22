@@ -19,7 +19,7 @@
           <input class="gruop-input" id="password2" type="password" placeholder="请确认新密码">
         </div>
         <div class="group submit">
-          <button class="default">确认</button>
+          <button class="btn default" @click="submit">确认</button>
         </div>
       </div>
     </login-component>
@@ -30,6 +30,11 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    submit() {
+      this.$router.push({ path: '/login' })
+    }
   }
 };
 </script>

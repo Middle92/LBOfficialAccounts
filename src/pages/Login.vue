@@ -11,7 +11,7 @@
           <input class="gruop-input" id="password" type="password" placeholder="请输入您的密码">
         </div>
         <div class="group submit">
-          <button class="default">登录</button>
+          <button class="btn default" @click="submit">登录</button>
         </div>
       </div>
       <div class="footer" slot="footer">
@@ -26,6 +26,11 @@
 export default {
   data() {
     return {};
+  }, 
+  methods: {
+    submit() {
+      this.$router.push({ path: '/home' })
+    }
   }
 };
 </script>

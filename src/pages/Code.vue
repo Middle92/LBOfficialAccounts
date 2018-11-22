@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="banner">
-      <img src="@/assets/banner01.png" alt="">
+      <img src="@/assets/imgs/banner01.png" alt="">
     </div>
     <div class="content">
       <p class="title">
@@ -10,7 +10,7 @@
       </p>
       <div class="code">
         <div class="code-content">
-          <button class="default">
+          <button class="btn default">
             <router-link to="/choose">付费购买　1.00元</router-link>
           </button>
         </div>
@@ -36,39 +36,41 @@ export default {
   flex-direction: column;
   height: 100%;
   .banner {
-    height: 2rem;
+    height: rem(75);
     img {
       width: 100%;
     }
   }
   .content {
     flex: 1;    
-    background: url('../assets/bg01.png');
+    background: url('../assets/imgs/bg01.png');
     background-size: cover;
     position: relative;
     .title {
-      font-size: .66rem;
+      font-size: rem(25);
       text-align: center;
-      line-height: .8rem;
+      line-height: rem(30);
       color: #ffffff;
-      margin-top: .8rem;
+      margin-top: rem(30);
     }
     .code {
-      width: 6.4rem;
-      height: 8.66rem;
+      width: rem(240);
+      height: rem(325);
       background-color: #fff;
-      border-radius: 10px;
+      border-radius: rem(10);
       margin: auto;
-      margin-top: 0.73rem;
-      padding-top: .66rem;
+      margin-top: rem(27.5);
+      padding-top: rem(25);
       box-sizing: border-box;
       .code-content {
+        float: left;
+        width: 100%;
         height: 100%;
-        background-image: url('../assets/bg02.png');
+        background-image: url('../assets/imgs/bg02.png');
         background-size: cover;
         button {
-          width: 5.33rem;
-          margin-top: 5.89rem;
+          width: rem(200);
+          margin-top: rem(225);
         }
       }
     }
@@ -79,12 +81,12 @@ export default {
       right: 0;
     }
     .tip {
-      padding: 0.26rem .4rem;
-      background-color: RGBA(255, 255, 255, .6);
+      padding: rem(10) rem(15);
+      background-color: $code-background-color;
       .tip-text {
-        font-size: 0.32rem;
-        color: RGBA(0, 141, 113, 1);
-        line-height: 0.48rem;
+        font-size: rem(12);
+        color: $code-text-color;
+        line-height: rem(18);
       }
     }
   }

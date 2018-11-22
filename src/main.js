@@ -14,11 +14,13 @@ import router from './router'
 /**
  * element-ui 组件引用
  */
-import { Select, Option, DatePicker } from 'element-ui';
+import { Select, Option, DatePicker, Checkbox, InputNumber } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(DatePicker);
+Vue.use(Checkbox);
+Vue.use(InputNumber);
 
 /*
 * npm install swiper -D

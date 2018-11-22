@@ -8,30 +8,30 @@
     </div>
 
     <div class="content">
-      <div class="item">
+      <div class="item" @click="pushRouter('/promotion')">
         <div class="item-content">
-          <img src="../assets/icon04.png" alt="">
+          <img src="@/assets/imgs/icon04.png" alt="">
           <p>公众号推广</p>
           <span>generalize</span>
         </div>
       </div>
-      <div class="item">
+      <div class="item" @click="pushRouter('/statistics')">
         <div class="item-content">
-          <img src="../assets/icon05.png" alt="">
+          <img src="@/assets/imgs/icon05.png" alt="">
           <p>数据统计</p>
           <span>statistics</span>
         </div>
       </div>
       <div class="item">
         <div class="item-content">
-          <img src="../assets/icon03.png" alt="">
+          <img src="@/assets/imgs/icon03.png" alt="">
           <p>个人中心</p>
           <span>personal</span>
         </div>
       </div>
       <div class="item">
         <div class="item-content">
-          <img src="../assets/icon06.png" alt="">
+          <img src="@/assets/imgs/icon06.png" alt="">
           <p>系统消息</p>
           <span>system news</span>
         </div>
@@ -44,36 +44,41 @@
 export default {
   data() {
     return {}
+  },
+  methods: {
+    pushRouter(router){
+      this.$router.push({ path: router })
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .top-bg {
-  height: 6.13rem;
-  background-image: url(../assets/bg06.png);
+  height: rem(230);
+  background-image: url(../assets/imgs/bg06.png);
   background-repeat: no-repeat;
   background-size: contain;
   .head-portrait {
     text-align: center;
-    padding-top: 0.98rem;
+    padding-top: rem(36);
     .head {
-      height: 1.6rem;
-      width: 1.6rem;
+      height: rem(60);
+      width: rem(60);
       background-color: #ffffff;
       border-radius: 50%;
       margin: auto;
     }
     .text {
-      margin-top: .32rem;
-      font-size: .4rem;
+      margin-top: rem(12);
+      font-size: rem(15);
       color: #fff;
     }
   }
 }
 .content {
-  padding: 0 .4rem;
-  margin-top: -2rem;
+  padding: 0 rem(15);
+  margin-top: rem(-75);
   &::after {
     content: '';
     display: block;
@@ -84,35 +89,35 @@ export default {
     width: 50%;
     float: left;
     box-sizing: border-box;
-    margin-bottom: .4rem;
+    margin-bottom: rem(15);
     &:nth-of-type(2n+1) {
-      padding-right: .2rem;
+      padding-right: rem(7.5);
     }
     &:nth-of-type(2n) {
-      padding-left: .2rem;
+      padding-left: rem(7.5);
     }
     .item-content {
       width: 100%;
-      border: 1px solid RGBA(234, 234, 234, 1);
+      border: 1px solid $border-color;
       border-radius: 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0.53rem 0;
+      padding: rem(20) 0;
       background-color: #fff;
       img {
-        height: 1.6rem;
-        width: 1.6rem;
+        height: rem(60);
+        width: rem(60);
       }
       p {
-        font-size: .4rem;
-        color: RGBA(51, 51, 51, 1);
-        margin-top: .4rem;
-        margin-bottom: 0.186rem;
+        font-size: rem(15);
+        color: $default-color;
+        margin-top: rem(15);
+        margin-bottom: rem(7);
       }
       span {
-        color: RGBA(221, 221, 221, 1);
-        font-size: 0.26rem;
+        color: $default-tip-color;
+        font-size: rem(10);
         text-transform:uppercase;
       }
     }

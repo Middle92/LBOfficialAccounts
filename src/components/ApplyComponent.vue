@@ -18,13 +18,13 @@ export default {
 <style lang="scss" scoped>
 .container {
   .banner {
-    height: 3rem;
+    height: rem(112.5);
     img {
       width: 100%;
     }
   }
   .content {
-    padding: 0.146rem 1rem 1.44rem;
+    padding: rem(5.5) rem(37.5) rem(54);
   }
 }
 </style>

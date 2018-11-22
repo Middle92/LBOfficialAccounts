@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <apply-component>
-      <img slot="banner" src="@/assets/bg03.png" alt="">
+      <img slot="banner" src="@/assets/imgs/bg03.png" alt="">
       <div class="content" slot="content">
         <div class="group">
           <label for="username">姓名</label>
@@ -37,7 +37,7 @@
           </select> -->
         </div>
         <div class="group submit">
-          <button class="default">提交申请</button>
+          <button class="btn default" @click="submit">提交申请</button>
         </div>
       </div>
     </apply-component>
@@ -50,6 +50,11 @@ export default {
   data() {
     return {
       value: null
+    }
+  },
+  methods: {
+    submit() {
+      this.$router.push({ path: '/login' })
     }
   }
 }

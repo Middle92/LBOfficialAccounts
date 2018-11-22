@@ -20,16 +20,16 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-  padding: 0.48rem 0.4rem;
+  padding: rem(18) rem(15);
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: RGBA(242, 242, 242, 1);
-  line-height: 0.48rem;
+  background-color: $footer-background-color;
+  line-height: rem(18);
   span {
-    font-size: 0.32rem;
-    color: RGBA(153, 153, 153, 1);
+    font-size: rem(12);
+    color: $placeholder-color;
     float: left;
   }
 }

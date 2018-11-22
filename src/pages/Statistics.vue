@@ -178,13 +178,13 @@ export default {
   flex-direction: column;
   height: 100%;
   .content {
-    padding: 0rem 0.4rem;
+    padding: 0 rem(15);
     .date {
       display: block;
       position: relative;
-      line-height: 0.58rem;
-      height: 0.58rem;
-      margin: 0.66rem 0 0.53rem;
+      line-height: rem(22);
+      height: rem(22);
+      margin: rem(25) 0 rem(20);
       &::after {
         content: "";
         display: block;
@@ -203,57 +203,57 @@ export default {
         top: 0;
         bottom: 0;
         width: 100%;
-        font-size: 0.4rem;
+        font-size: rem(15);
         .el-icon-date {
           position: absolute;
           vertical-align: middle;
-          font-size: 0.58rem;
+          font-size: rem(22);
           color: #cccccc;
           right: 0;
           top: 50%;
           transform: translateY(-50%);
         }
         span {
-          font-size: 0.61rem;
+          font-size: rem(22);
         }
       }
     }
     .choose {
       font-size: 0;
-      margin-bottom: 0.13rem;
+      margin-bottom: rem(11);
       li {
         width: 33.3%;
         display: inline-block;
         box-sizing: border-box;
         &:first-child {
-          padding-right: 0.13rem;
+          padding-right: rem(5);
         }
         &:last-child {
-          padding-left: 0.13rem;
+          padding-left: rem(5);
         }
         &:not(:first-child:last-child) {
-          padding: 0 0.13rem;
+          padding: 0 rem(5);
         }
       }
     }
     .number-view {
-      padding: 1.013rem 0;
-      border: 1px solid RGBA(234, 234, 234, 1);
-      box-shadow: 0px 5px 10px RGBA(170, 170, 170, 0.2);
+      padding: rem(38) 0;
+      border: rem(1) solid $border-color;
+      box-shadow: $default-shadow-style;
       font-size: 0;
-      margin-bottom: 0.56rem;
+      margin-bottom: rem(21);
       li {
         width: 50%;
         display: inline-block;
-        font-size: 0.8rem;
-        color: RGBA(26, 188, 156, 1);
-        padding-left: 0.8rem;
+        font-size: rem(30);
+        color: $base-background-color;
+        padding-left: rem(30);
         box-sizing: border-box;
         span {
           display: block;
-          font-size: 0.32rem;
-          color: RGBA(153, 153, 153, 1);
-          margin-bottom: 0.4rem;
+          font-size: rem(12);
+          color: $border-color;
+          margin-bottom: rem(15);
         }
       }
     }
@@ -261,6 +261,7 @@ export default {
   #main {
     flex: 1;
     overflow: hidden;
+    background-color: $echarts-background;
   }
 }
 .el-date-editor.el-input {
@@ -273,27 +274,27 @@ export default {
 .choose-input {
   width: 100%;
   .el-input {
-    font-size: 0.32rem;
+    font-size: rem(12);
     input {
-      padding-left: 0.13rem;
-      height: 1.013rem;
-      line-height: 1.013rem;
+      padding-left: rem(5);
+      height: rem(38);
+      line-height: rem(38);
       background-size: cover;
       color: #fff;
     }
     .el-input__icon {
-      font-size: 0.32rem;
-      line-height: 1.013rem;
+      font-size: rem(12);
+      line-height: rem(38);
     }
   }
   &.blue input {
-    background-image: url("../assets/bg07.png");
+    background-image: url("../assets/imgs/bg07.png");
   }
   &.green input {
-    background-image: url("../assets/bg08.png");
+    background-image: url("../assets/imgs/bg08.png");
   }
   &.origin input {
-    background-image: url("../assets/bg09.png");
+    background-image: url("../assets/imgs/bg09.png");
   }
 }
 </style>

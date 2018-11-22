@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <apply-component>
-      <img slot="banner" src="@/assets/bg04.png" alt="">
+      <img slot="banner" src="@/assets/imgs/bg04.png" alt="">
       <div class="content" slot="content">
         <div class="group">
           <label for="username">姓名</label>
@@ -16,7 +16,7 @@
           <input class="gruop-input" id="email" type="text" placeholder="请输入您的邮箱">
         </div>
         <div class="group submit">
-          <button class="default">提交申请</button>
+          <button class="btn default" @click="submit">提交申请</button>
         </div>
       </div>
     </apply-component>
@@ -28,6 +28,11 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    submit() {
+      this.$router.push({ path: '/login' })
+    }
   }
 };
 </script>
