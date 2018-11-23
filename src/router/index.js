@@ -11,6 +11,7 @@ import retrievePasswordPage from '@/pages/RetrievePassword';// 忘记密码
 import homePage from '@/pages/Home';// 忘记密码
 import statisticsPage from '@/pages/Statistics'; // 数据统计
 import promotionPage from '@/pages/PromotionApplication'; // 公众号推广申请
+import personalPage from '@/pages/PersonalCenter'; // 公众号推广申请
 Vue.use(Router)
 
 export default new Router({
@@ -59,6 +60,10 @@ export default new Router({
       path: '/promotion',
       name: 'promotionPage',
       component: promotionPage
+    }, {
+      path: '/personal',
+      name: 'personalPage',
+      component: personalPage
     }
   ]
 })

@@ -93,4 +93,31 @@ button.cancel {
     color: $border-color;
   }
 }
+
+.choose-input {
+  width: 100%;
+  .el-input {
+    font-size: rem(12);
+    input {
+      padding-left: rem(5);
+      height: rem(38);
+      line-height: rem(38);
+      background-size: cover;
+      color: #fff;
+    }
+    .el-input__icon {
+      font-size: rem(12);
+      line-height: rem(38);
+    }
+  }
+  &.blue input {
+    background-image: url("./assets/imgs/bg07.png");
+  }
+  &.green input {
+    background-image: url("./assets/imgs/bg08.png");
+  }
+  &.origin input {
+    background-image: url("./assets/imgs/bg09.png");
+  }
+}
 </style>
