@@ -22,7 +22,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { setCookie, getCookie, checkCookie } from "@/utils/cookie";
+
 export default {
   data() {
     return {

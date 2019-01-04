@@ -143,7 +143,6 @@ export default {
     },
     // 查询区域-渠道-人群条件下的价格
     async getPrice() {
-      console.log(1)
       let { area, channel, man, woman, manValue, womanValue } = this;
 
       if(area[0] && channel[0] && (man || woman)) {
@@ -156,7 +155,6 @@ export default {
               people: '男'
             }
           }).then(res => {
-            console.log(2)
             this.manObject = res;
           })
         }
@@ -169,7 +167,6 @@ export default {
               people: '女'
             }
           }).then(res => {
-            console.log(2)
             this.womanObject = res;
           })
         }
@@ -194,7 +191,7 @@ export default {
           required: true,
           requiredMassage: '请重新登陆',
           callBack:() => {
-            this.$router.push({ path: '/Login' })
+            this.$router.replace({ path: '/Login' })
           }
         }, {
           value: image,
@@ -242,7 +239,7 @@ export default {
               text: '成功',
               width: '3em',
               onHide: () => {
-                this.$router.push({ path: '/Home' })
+                this.$router.replace({ path: '/Home' })
               }
             })
           }

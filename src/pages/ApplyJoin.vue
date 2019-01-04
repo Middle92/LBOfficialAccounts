@@ -71,7 +71,7 @@ export default {
               text: '提交成功',
               width: '3em',
               onHide: () => {
-                this.$router.push({ path: '/Login' })
+                this.$router.replace({ path: '/Login' })
               }
           })
         }

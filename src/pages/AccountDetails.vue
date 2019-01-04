@@ -28,7 +28,7 @@
                 <p class="item-title">绿葆公众号</p>
                 <div class="item-content">
                     <div class="item-list">
-                        <p>￥{{item.toSystemMessage}}</p>
+                        <p>￥{{item.completeMoney}}</p>
                         <span>已吸粉价格</span>
                     </div>
                     <div class="item-list">

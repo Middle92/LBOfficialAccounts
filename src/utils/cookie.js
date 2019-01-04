@@ -27,8 +27,17 @@ const checkCookie = (c_name) => {
     }
 }
 
+const delCookie = (c_name) => { 
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() - 1); 
+    var cval=getCookie(c_name); 
+    if(cval!=null) 
+        document.cookie= c_name + "="+cval+";expires="+exp.toGMTString(); 
+}
+
 export {
     setCookie,
     getCookie,
-    checkCookie
+    checkCookie,
+    delCookie
 }

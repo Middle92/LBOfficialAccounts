@@ -91,7 +91,7 @@ export default {
             text: '注册成功',
             width: '3em',
             onHide: () => {
-              this.$router.push({ path: '/Login' })
+              this.$router.replace({ path: '/Login' })
             }
           })
         }
@@ -104,7 +104,6 @@ export default {
     this.Fetch({
       url: '/operator/queryAllOperatorIdNames',
     }).then(res => {
-      console.log(res)
       this.operatorOption = res.map(item => {
         return {
           name: item.name,

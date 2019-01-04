@@ -90,20 +90,25 @@ Vue.directive('bg-image', {
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
 
+// 路由跳转前
 router.beforeEach((to, form, next) => {
   let phone = checkCookie('username'),
       password = checkCookie('password'),
       role = checkCookie('role'),
       userinfo = store.getters.userinfo,
       url = '';
-  
-  if(to.meta.isRouter || userinfo) {
+      
+  if(to.meta.isRouter || userinfo && (to.meta.role === getCookie('role'))) {
     next();
   } else {
     if(!userinfo && phone && password && role) {
-      (getCookie('role') === 'guardian') && (url = '/guardian/login')
-      (getCookie('role') === 'advertiser') && (url = '/advertiser/login')
-      console.log(url)
+      if(to.meta.role !== getCookie('role')) {
+        if(to.meta.role === 'guardian') router.replace({ path: '/Accendant' })
+        else if(to.meta.role === 'advertiser') router.replace({ path: '/Login' })
+        return;
+      }
+      if(getCookie('role') === 'guardian') url = '/guardian/login'
+      if(getCookie('role') === 'advertiser') url = '/advertiser/login'
       store.getters.login(url, {
         phone: getCookie('username'), 
         password: getCookie('password')
@@ -111,8 +116,8 @@ router.beforeEach((to, form, next) => {
         next()
       })
     } else {
-      (to.meta.role === 'guardian') && (router.replace({ path: '/Accendant' }))
-      (to.meta.role === 'guardian') && (router.replace({ path: '/Accendant' }))
+      if(to.meta.role === 'guardian') router.replace({ path: '/Accendant' })
+      else if(to.meta.role === 'advertiser') router.replace({ path: '/Login' })
     }
   }
 })

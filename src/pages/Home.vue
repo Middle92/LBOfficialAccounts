@@ -28,7 +28,7 @@ export default {
           titleTip: 'personal',
           icon: require('../../static/icon03.png'),
           callback: () => {
-            this.pushRouter('/PersonalCenter');
+            this.pushRouter('/PersonalCenter/advertiser');
           }
         }, {
           title: '系统消息',
@@ -42,8 +42,12 @@ export default {
     }
   },
   methods: {
-    pushRouter(router){
-      this.$router.push({ path: router })
+    pushRouter(router, params = false){
+      if(!params) {
+        this.$router.push({ path: router })
+      } else {
+        this.$router.push({ path: router, params: params })
+      }
     }
   }
 }

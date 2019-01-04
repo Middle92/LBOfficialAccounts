@@ -1,9 +1,9 @@
 <template>
     <div class="conatiner" v-if="data && data.length > 0">
-        <div v-for="(item, index) in data" :key="index">
+        <div v-for="(item, index) in data" :key="index" @click="editDate">
             <span class="time">{{dateFormat(new Date(item.addTime).getTime(), 'YYYY-MM-DD')}}</span>
             <div class="content">
-                <p class="content-title read">{{item.title}}</p>
+                <p class="content-title" :class="{'read': !item.dealTime}">{{item.title}}</p>
                 <span class="content-default">{{item.content}}</span>
             </div>
         </div>
@@ -35,13 +35,15 @@ import dateFormat from '@/utils/date-format';
 export default {
     data() {
         return {
-            data: []
+            data: [],
+            remark: null
         }
     },
     computed: {
         ...mapGetters(['userinfo'])
     },
     methods: {
+        dateFormat,
         messageList() {
             this.Fetch({
                 url: '/message/messageList.ad',
@@ -49,11 +51,21 @@ export default {
                     id: this.userinfo.id
                 }
             }).then(res => {
-                console.log(res);
                 this.data = res;
             })
         },
-        dateFormat: dateFormat,
+        editDate() {
+            let { remark } = this
+            this.Fetch({
+                url: '/message/editDate.ad',
+                body: {
+                    id: this.userinfo.id
+                }
+            }).then(res => {
+                console.log(res);
+                // this.data = res;
+            })
+        }
     }, 
     mounted() {
         this.messageList();

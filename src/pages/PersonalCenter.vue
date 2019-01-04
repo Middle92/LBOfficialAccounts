@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bg" v-bg-image="'bg11'">
-            <img class="icon" src="../../static/icon08.png" alt="" @click="toSystemMessage">
+            <img v-if="role === 'advertiser'" class="icon" src="../../static/icon08.png" alt="" @click="toSystemMessage">
         </div>
         <div class="content">
             <div class="head">
@@ -13,7 +13,7 @@
                     <label for="">手机号码</label>
                     <span class="gruop-input">{{userinfo.phone}}</span>
                 </div>
-                <div class="group-inline">
+                <div v-if="role === 'advertiser'" class="group-inline">
                     <label for="">账户余额</label>
                     <span class="gruop-input">{{userinfo.money}}元</span>
                     <router-link to="/AccountDetails">账户明细</router-link>
@@ -28,29 +28,44 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { delCookie } from "@/utils/cookie";
 export default {
     data() {
         return {}
     },
     computed: {
-        ...mapGetters(['userinfo'])
+        ...mapGetters(['userinfo']),
+        role() {
+            return this.$route.params.role
+        }
     },
     mounted() {
-        this.Fetch({
-            url: '/advertiser/personalCenter.ad',
-            body: {
-                id: this.userinfo.id
-            }
-        }).then(res => {
-            if(res) {
-                this.$store.commit('assignUserinfo', res);
-            }
-        })
+        if(this.role === 'advertiser') {
+            this.Fetch({
+                url: '/advertiser/personalCenter.ad',
+                body: {
+                    id: this.userinfo.id
+                }
+            }).then(res => {
+                if(res) {
+                    this.$store.commit('assignUserinfo', res);
+                }
+            })
+        }
     },
     methods: {
         loginOut() {
+            let url = '', route = '';
+            if(this.role === 'advertiser') {
+                url = '/advertiser/loginOut.ad'
+                route = '/Login'
+            } else {
+                url = '/guardian/loginOut.gu'
+                route = '/Accendant'
+            }
+
             this.Fetch({
-                url: '/advertiser/loginOut.ad'
+                url,
             }).then(res => {
                 console.log(res)
                 if(res) {
@@ -58,7 +73,10 @@ export default {
                         type: 'text',
                         text: '退出登录成功',
                         onHide: () => {
-                            // alert('x')
+                            delCookie('password')
+                            delCookie('role')
+                            delCookie('username')
+                            this.$router.replace({ path: route })
                         }
                     })
                 }
@@ -98,8 +116,9 @@ export default {
         width: rem(100);
         height: rem(100);
         border-radius: 50%;
-        background-color: #ffffff;
+        background-color: #dddddd;
         overflow: hidden;
+        text-align: center;
         img {
             max-width: 100%;
             max-height: 100%;

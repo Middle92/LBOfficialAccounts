@@ -120,7 +120,6 @@ export default {
         // 上传图片的回调
         const v1 = await uploadFile(logo[0]);
         // 不返回false
-        console.log(v1)
         if(!v1) return false;
         // 执行提交表单
         const v2 = await applyAd(v1);

@@ -101,10 +101,10 @@ export default new Router({
       },
       component: PromotionApplicationPage
     }, {
-      path: '/PersonalCenter',
+      path: '/PersonalCenter/:role',
       name: 'PersonalCenterPage',
       meta: {
-        role: 'advertiser'
+        isRouter: true
       },
       component: PersonalCenterPage
     }, {

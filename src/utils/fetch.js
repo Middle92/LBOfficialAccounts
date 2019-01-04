@@ -56,9 +56,22 @@ const Fetch = (options, text='加载中...') => {
         headers: Object.assign({}, headers),
         credentials: credentials ? 'include' : 'omit',
     })
-    .then(res => res.json())
+}
+
+const FetchRace = (options, text='加载中...', timeout = 3000) => {
+    return Promise.race([
+        Fetch(options, text), 
+        new Promise((resolve, rejects) => {
+            setTimeout(() => {
+                
+                rejects(new Error('request timeout'))
+            }, timeout)
+        })
+    ])
     .then(res => {
-        console.log('then1', res)
+        return res.json()
+    })
+    .then(res => {
         vm2.$vux.loading.hide();
         // 处理header
         // 如果 code 返回不是 000 处理错误提示`
@@ -82,28 +95,19 @@ const Fetch = (options, text='加载中...') => {
         return res.body
     }).catch(err => {
         vm2.$vux.loading.hide();
-        vm2.$vux.toast.show({
-            type: 'text',
-            text: err.toString()
-        })
+        if(/request timeout/.test(err.toString())) {
+            vm2.$vux.toast.show({
+                type: 'text',
+                text: '请求超时'
+            })
+        } else {
+            vm2.$vux.toast.show({
+                type: 'text',
+                text: err.toString()
+            })
+        }
         throw new Error(err);
     })
-}
-
-const FetchRace = (options, text='加载中...', timeout = 3000) => {
-    return Promise.race([
-        Fetch(options, text), 
-        new Promise((resolve, rejects) => {
-            setTimeout(() => {
-                vm2.$vux.loading.hide();
-                vm2.$vux.toast.show({
-                    type: 'text',
-                    text: '请求超时'
-                })
-                rejects(new Error('request timeout'))
-            }, timeout)
-        })
-    ])
 }
 
 export default FetchRace;

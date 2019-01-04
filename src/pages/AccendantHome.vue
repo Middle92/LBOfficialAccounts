@@ -24,7 +24,7 @@ export default {
                     titleTip: 'personal',
                     icon: require('../../static/icon03.png'),
                     callback: () => {
-                        this.$router.push({ path: '/PersonalCenter' })
+                        this.$router.push({ path: '/PersonalCenter/guardian' })
                     }
                 }
             ]

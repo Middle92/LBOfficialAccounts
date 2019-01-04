@@ -38,7 +38,6 @@ export default {
                     remark
                 }
             }).then(res => {
-                console.log(res)
             })
         }
     },

@@ -25,7 +25,7 @@
       <div class="choose" id="statisticsChoose">
         <ul>
           <li>
-            <group class="blue" v-bg-image="'bg07'">
+            <group class="select" v-bg-image="'bg07'">
               <popup-picker 
                 value-text-align="left" 
                 :data="list1" 
@@ -36,7 +36,7 @@
             </group>
           </li>
           <li>
-            <group class="green" v-bg-image="'bg08'">
+            <group class="select" v-bg-image="'bg08'">
               <popup-picker 
                 value-text-align="left" 
                 :data="list2" 
@@ -47,7 +47,7 @@
             </group>
           </li>
           <li>
-            <group class="origin" v-bg-image="'bg09'">
+            <group class="select" v-bg-image="'bg09'">
               <popup-picker 
                 value-text-align="left" 
                 :data="list3" 
@@ -267,19 +267,15 @@ export default {
   },
   watch: {
     startDateValue(val, oldval) {
-      // console.log(val);
       this.dataStatistics();
     },
     value1(val, oldval) {
-      // console.log(val);
       this.dataStatistics();
     },
     value2(val, oldval) {
-      // console.log(val);
       this.dataStatistics();
     },
     value3(val, oldval) {
-      // console.log(val);
       this.dataStatistics();
     }
   }
@@ -386,12 +382,19 @@ export default {
 #statisticsChoose {
   ul {
     display: flex;
+    .select {
+      background-size: cover;
+      padding-top: 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
     .weui-cells {
       margin: 0;
       height: rem(38);
       line-height: rem(38);
       border-radius: rem(5);
       background-size: cover;
+      background-color: transparent;
       .weui-cell {
         padding: 0 rem(10);
         .vux-cell-primary {

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Fetch from '@/utils/fetch'
+import { setCookie } from "@/utils/cookie";
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -33,8 +34,8 @@ const store = new Vuex.Store({
                         width: '3em',
                         onHide: () => {
                           // 保存账号密码
-                          setCookie("username", phone);
-                          setCookie("password", password);
+                          setCookie("username", body.phone);
+                          setCookie("password", body.password);
                           // 是否有role
                           role && setCookie("role", role);
                           // 回调
