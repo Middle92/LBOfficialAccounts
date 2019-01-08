@@ -28,7 +28,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { delCookie } from "@/utils/cookie";
+import { getCookie, delCookie } from "@/utils/cookie";
 export default {
     data() {
         return {}
@@ -84,6 +84,15 @@ export default {
         },
         toSystemMessage() {
             this.$router.push({ path: '/SystemMessage' })
+        }
+    },
+    beforeRouteEnter(to, from, next) {
+        if(to.params.role == getCookie('role')) {
+            next()
+        } else if(getCookie('role') == 'advertiser') {
+            router.replace({ path: '/Login' })
+        } else if(getCookie('role') == 'guardian') {
+            router.replace({ path: '/Accendant' })
         }
     }
 }

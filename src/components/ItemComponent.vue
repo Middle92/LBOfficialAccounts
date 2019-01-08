@@ -12,7 +12,7 @@
         <div class="item-detail">内容：{{content}}</div>
         <div class="item-detail">备注：{{remark}}</div>
         <!-- <button class="btn" :class="status ? 'default' : 'disabled'" @click="callback">{{status ? '标为解决' : '已解决'}}</button> -->
-        <button class="btn" :class="status ? 'default' : 'disabled'" @click="modalCommit">{{status ? '标为解决' : '已解决'}}</button>
+        <button class="btn" :class="status == '0' ? 'default' : 'disabled'" @click="modalCommit">{{status == "0" ? '标为解决' : '已解决'}}</button>
     </div>
 </template>
 
@@ -24,10 +24,10 @@ export default {
             type: String,
             default: ''
         },
-        statusText: {
-            type: String,
-            default: ''
-        },
+        // statusText: {
+        //     type: String,
+        //     default: ''
+        // },
         time: {
             type: String,
             default: ''
@@ -41,8 +41,7 @@ export default {
             default: ''
         },
         status: {
-            type: Boolean,
-            default: false
+            default: ''
         },
         id: {
             default: ''
@@ -53,8 +52,20 @@ export default {
     },
     methods: {
         modalCommit() {
-            if(this.status) commit.$emit('modal', this.id)
+            if(this.status == "0") commit.$emit('modal', this.id)
         }
+    },
+    computed: {
+        statusText() {
+            switch(this.status) {
+                case "0":
+                    return '未解决';
+                case "1":
+                    return '已解决';
+                default: 
+                    return '暂无状态';
+            }
+        },
     }
 }
 </script>

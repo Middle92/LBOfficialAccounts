@@ -10,8 +10,6 @@ Vue.prototype.Fetch = Fetch;
 // cookie
 import {getCookie, checkCookie} from '@/utils/cookie'
 
-// 引入微信jssdk
-// import wx from 'weixin-js-sdk';
 // Vue.use(wx);
 /**
  * 全局引入vux
@@ -31,13 +29,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(Checkbox);
 Vue.use(InputNumber);
 
-/*
-* npm install swiper -D
-* import swiper
-* 全局定义swiper
-*/
-// import Swiper from 'swiper';
-// Vue.prototype.Swiper = new Swiper;
 
 /**
  * npm install lodash -D
@@ -75,8 +66,6 @@ requireComponent.keys().forEach(fileName => {
 })
 
 // 引入校验插件
-// import Vuelidate from 'vuelidate'
-// Vue.use(Vuelidate)
 import validate from './utils/validate';
 Vue.prototype.validate = validate;
 
@@ -90,21 +79,31 @@ Vue.directive('bg-image', {
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
 
+// 转换location.search为对象
+import searchObject from '@/utils/search-query'
 // 路由跳转前
 router.beforeEach((to, form, next) => {
   let phone = checkCookie('username'),
       password = checkCookie('password'),
       role = checkCookie('role'),
       userinfo = store.getters.userinfo,
-      url = '';
-      
+      url = '',
+      code = searchObject(location.search)["code"],
+      appid = 'wx0bfbb3aa682af17d',
+      redirect_uri = 'http://www.greenbonnet.cn',
+      scope= 'snsapi_userinfo',
+      state = searchObject(location.search)["state"];
+  if(!code && process.env.EVN_CONFIG != 'dev') {
+    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&state=${state}#wechat_redirect`
+  }
   if(to.meta.isRouter || userinfo && (to.meta.role === getCookie('role'))) {
     next();
   } else {
+    let routeRole = (to.meta.role || to.params.role)
     if(!userinfo && phone && password && role) {
-      if(to.meta.role !== getCookie('role')) {
-        if(to.meta.role === 'guardian') router.replace({ path: '/Accendant' })
-        else if(to.meta.role === 'advertiser') router.replace({ path: '/Login' })
+      if(routeRole !== getCookie('role')) {
+        if(routeRole === 'guardian') router.replace({ path: '/Accendant' })
+        else if(routeRole === 'advertiser') router.replace({ path: '/Login' })
         return;
       }
       if(getCookie('role') === 'guardian') url = '/guardian/login'
@@ -116,8 +115,8 @@ router.beforeEach((to, form, next) => {
         next()
       })
     } else {
-      if(to.meta.role === 'guardian') router.replace({ path: '/Accendant' })
-      else if(to.meta.role === 'advertiser') router.replace({ path: '/Login' })
+      if(routeRole === 'guardian') router.replace({ path: '/Accendant' })
+      else if(routeRole === 'advertiser') router.replace({ path: '/Login' })
     }
   }
 })

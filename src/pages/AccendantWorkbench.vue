@@ -14,7 +14,7 @@
                 :time="dataFormat(item.addTime, 'YYYY-MM-DD')"
                 :content="item.content"
                 :remark="item.remark"
-                :status="Boolean(item.status-0)"
+                :status="item.status"
                 :id="item.id"
             ></item-component>
         </div>

@@ -23,9 +23,26 @@
 </template>
 
 <script>
+// 转换location.search为对象
+import searchObject from '@/utils/search-query'
 export default {
   data() {
     return {};
+  },
+  beforeRouteEnter(to, from, next) {
+    let state = searchObject(location.search)["state"]
+    let pushRoute = (path) => {
+      next(vm => {
+        vm.$router.push({path})
+      })
+    }
+    if(state && state.toLocaleLowerCase() == 'login') {
+      pushRoute('/Login')
+    } else if(state && state.toLocaleLowerCase() == 'accendant') {
+      pushRoute('/Accendant')
+    } else {
+      pushRoute('/code')
+    }
   }
 };
 </script>

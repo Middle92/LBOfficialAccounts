@@ -103,9 +103,6 @@ export default new Router({
     }, {
       path: '/PersonalCenter/:role',
       name: 'PersonalCenterPage',
-      meta: {
-        isRouter: true
-      },
       component: PersonalCenterPage
     }, {
       path: '/SystemMessage',
@@ -145,7 +142,7 @@ export default new Router({
       path: '/AccountDetails',
       name: 'AccountDetailsPage',
       meta: {
-        role: 'guardian'
+        role: 'advertiser'
       },
       component: AccountDetailsPage
     }

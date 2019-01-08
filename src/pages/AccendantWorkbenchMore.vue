@@ -2,11 +2,10 @@
     <div class="container">
         <item-component v-for="(item, index) of data" :key="index"
             :title="`您有一台设备(设备ID:${item.machine})`"
-            :statusText="statusText(item.status)"
             :time="dataFormat(item.addTime, 'YYYY-MM-DD')"
             :content="item.content"
             :remark="item.remark"
-            :status="Boolean(item.status-0)"
+            :status="item.status"
             :id="item.id"
         ></item-component>
     </div>

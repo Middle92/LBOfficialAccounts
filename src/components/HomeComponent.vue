@@ -3,7 +3,7 @@
         <div class="top-bg" v-bg-image="'bg06'">
             <div class="head-portrait">
                 <div class="head">
-                    <img :src="userinfo && userinfo.headImg" v-if="userinfo && userinfo.headImg" alt="">
+                    <img :src="userinfo && (userinfo.headImg || userinfo.logo)" v-if="userinfo && (userinfo.headImg || userinfo.logo)" alt="">
                 </div>
                 <p class="text">{{userinfo && userinfo.name}}</p>
             </div>
@@ -37,7 +37,8 @@ export default {
         }
     },
     data() {
-        return {}
+        return {
+        }
     },
     computed: {
         ...mapGetters(['userinfo'])
