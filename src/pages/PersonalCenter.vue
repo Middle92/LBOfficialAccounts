@@ -89,10 +89,12 @@ export default {
     beforeRouteEnter(to, from, next) {
         if(to.params.role == getCookie('role')) {
             next()
-        } else if(getCookie('role') == 'advertiser') {
-            router.replace({ path: '/Login' })
-        } else if(getCookie('role') == 'guardian') {
-            router.replace({ path: '/Accendant' })
+        } else {
+            if(getCookie('role') == 'advertiser') {
+                router.replace({ path: '/Login' })
+            } else if(getCookie('role') == 'guardian') {
+                router.replace({ path: '/Accendant' })
+            }
         }
     }
 }

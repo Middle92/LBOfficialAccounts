@@ -233,7 +233,7 @@ button.cancel {
 // .weui-toast
 .weui-toast {
   width: rem(130);
-  min-height: rem(130);
+  min-height: rem(130) !important;
   margin-left: rem(-60);
   .weui-toast__content {
     font-size: rem(14);

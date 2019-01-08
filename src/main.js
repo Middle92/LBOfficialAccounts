@@ -94,29 +94,39 @@ router.beforeEach((to, form, next) => {
       scope= 'snsapi_userinfo',
       state = searchObject(location.search)["state"];
   if(!code && process.env.EVN_CONFIG != 'dev') {
-    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&state=${state}#wechat_redirect`
+    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&state=${state}#wechat_redirect`;
+    return
   }
   if(to.meta.isRouter || userinfo && (to.meta.role === getCookie('role'))) {
     next();
   } else {
     let routeRole = (to.meta.role || to.params.role)
-    if(!userinfo && phone && password && role) {
-      if(routeRole !== getCookie('role')) {
+    // 判断有没有用户信息
+    if(!userinfo) { // 没有用户信息
+      // 没有用户信息就判断 手机 密码 权限
+      if(phone && password && role) {
+        // 权限 是否跟 cookie 一样
+        if(routeRole !== getCookie('role')) {
+          // 如果不等于 跳转 登陆页
+          if(routeRole === 'guardian') router.replace({ path: '/Accendant' })
+          else if(routeRole === 'advertiser') router.replace({ path: '/Login' })
+          return;
+        }
+        // 自动登陆获取userinfo
+        if(getCookie('role') === 'guardian') url = '/guardian/login'
+        if(getCookie('role') === 'advertiser') url = '/advertiser/login'
+        store.getters.login(url, {
+          phone: getCookie('username'), 
+          password: getCookie('password')
+        },(res) => {
+          next()
+        })
+      } else { // cookie 手机 密码 权限 就跳转登陆
         if(routeRole === 'guardian') router.replace({ path: '/Accendant' })
         else if(routeRole === 'advertiser') router.replace({ path: '/Login' })
-        return;
       }
-      if(getCookie('role') === 'guardian') url = '/guardian/login'
-      if(getCookie('role') === 'advertiser') url = '/advertiser/login'
-      store.getters.login(url, {
-        phone: getCookie('username'), 
-        password: getCookie('password')
-      },(res) => {
-        next()
-      })
-    } else {
-      if(routeRole === 'guardian') router.replace({ path: '/Accendant' })
-      else if(routeRole === 'advertiser') router.replace({ path: '/Login' })
+    } else { // 有用户信息
+      next();
     }
   }
 })
