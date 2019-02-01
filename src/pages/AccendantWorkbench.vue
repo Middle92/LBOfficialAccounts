@@ -31,7 +31,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import dataFormat from '@/utils/date-format';
-
+import commit from '@/utils/commit';
 export default {
     data() {
         return {
@@ -107,7 +107,10 @@ export default {
         }
     },
     mounted() {
-        this.queryLogList()
+        this.queryLogList();
+        commit.$on('reset', () => {
+            this.queryLogList()
+        })
     }
 }
 </script>

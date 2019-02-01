@@ -5,7 +5,7 @@
         </div>
         <div class="content">
             <div class="head">
-                <img :src="userinfo && userinfo.headImg" alt="">
+                <img :src="userinfo && (userinfo.headImg || userinfo.logo)" alt="">
             </div>
             <div class="name">{{userinfo && userinfo.name}}</div>
             <div class="form-gruop" v-if="userinfo">
@@ -67,7 +67,6 @@ export default {
             this.Fetch({
                 url,
             }).then(res => {
-                console.log(res)
                 if(res) {
                     this.$vux.toast.show({
                         type: 'text',
@@ -76,6 +75,7 @@ export default {
                             delCookie('password')
                             delCookie('role')
                             delCookie('username')
+                            this.$store.commit('setUserinfo', null)
                             this.$router.replace({ path: route })
                         }
                     })

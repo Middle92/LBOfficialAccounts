@@ -48,21 +48,23 @@
       <div class="checked">
         <label for="">选择投放人群和吸粉量</label>
         <!-- <el-checkbox-group> -->
-          <div class="check-gruop">
+          <div class="check-gruop" v-if="manShow">
             <el-checkbox v-model="man">男</el-checkbox>
-            <el-input-number size="mini" v-model="manValue" :min="0"></el-input-number>
+            <el-input-number :disabled="!man" size="mini" v-model="manValue" :min="0"></el-input-number>
           </div>
 
-          <div class="check-gruop">
+          <div class="check-gruop" v-if="womanShow">
             <el-checkbox v-model="woman">女</el-checkbox>
-            <el-input-number size="mini" v-model="womanValue" :min="0"></el-input-number>
+            <el-input-number :disabled="!woman" size="mini" v-model="womanValue" :min="0"></el-input-number>
           </div>
+
+          <div class="check-gruop error" v-if="!manShow && !womanShow">暂未设置相关数据价格</div>
         <!-- </el-checkbox-group> -->
       </div>
       <div class="total">
         <div class="total-text">
           <label for="">合计价格</label>
-          <span>{{totalMoney}}</span>
+          <span v-show="man || woman">{{totalMoney}}</span>
         </div>
         <div class="info">
           <div class="info-group">
@@ -91,7 +93,7 @@
         </div>
       </div>
       <div class="btns">
-        <button class="btn cancel">取消</button>
+        <button class="btn cancel" @click="() => {this.$router.go(-1)}">取消</button>
         <button class="btn default" @click="submit">提交审核</button>
       </div>
     </div>
@@ -111,9 +113,11 @@ export default {
       channelOptions: [],
       channelOptionsValue: null,
       man: false,
+      manShow: true,
       manValue: 0,
       manObject: null,
       woman: false,
+      womanShow: true,
       womanValue: 0,
       womanObject: null,
       array: null,
@@ -147,27 +151,21 @@ export default {
 
       if(area[0] && channel[0] && (man || woman)) {
         if(man) {
-          await this.Fetch({
-            url: '/priceSet/getPrice.ad',
-            body: {
-              area: area[0], 
-              channel: channel[0], 
-              people: '男'
+          await this.getPriceFun('男').then(res => {
+            if(res) {
+              this.manObject = res;
+            } else {
+              this.man = this.manShow = false;
             }
-          }).then(res => {
-            this.manObject = res;
           })
         }
         if(woman) {
-          await this.Fetch({
-            url: '/priceSet/getPrice.ad',
-            body: {
-              area: area[0], 
-              channel: channel[0], 
-              people: '女'
+          await this.getPriceFun('女').then(res => {
+            if(res) {
+              this.womanObject = res;
+            } else {
+              this.woman = this.womanShow = false;
             }
-          }).then(res => {
-            this.womanObject = res;
           })
         }
       }
@@ -189,7 +187,7 @@ export default {
          {
           value: this.userinfo && this.userinfo.id,
           required: true,
-          requiredMassage: '请重新登陆',
+          requiredMassage: '请重新登录',
           callBack:() => {
             this.$router.replace({ path: '/Login' })
           }
@@ -257,41 +255,57 @@ export default {
     // 计算总价格
     totalMoneyFun() {
       let { womanValue, womanObject, manValue, manObject } = this;
-
+      let womanCount, manCount;
       this.array = [];
       let pushMan = () => {
+        womanCount = parseFloat((manValue * manObject.price).toFixed(2));
         this.array.push({
           id: manObject.id,
-          count: manValue * manObject.price
+          count: manValue
         })
+        return womanCount;
       }
       let pushWoman = () => {
+        manCount = parseFloat((womanValue * womanObject.price).toFixed(2));
         this.array.push({
           id: womanObject.id,
-          count: womanValue * womanObject.price
+          count: womanValue
         })
+        return manCount;
       }
 
       if(womanObject && manObject) {
-        this.totalMoney = womanValue * womanObject.price + manValue * manObject.price;
-        pushWoman();
-        pushMan();
+        this.totalMoney = pushWoman() + pushMan();
       } else if(womanObject) {
-        this.totalMoney = womanValue * womanObject.price;
-        pushWoman();
+        this.totalMoney = pushWoman();
       } else if (manObject) {
-        this.totalMoney = manValue * manObject.price;
-        pushMan();
+        this.totalMoney = pushMan();
       }
+    },
+    // 提交方法
+    getPriceFun(people) {
+      let { area, channel, man, woman, manValue, womanValue } = this;
+      return this.Fetch({
+        url: '/priceSet/getPrice.ad',
+        body: {
+          area: area[0], 
+          channel: channel[0], 
+          people
+        }
+      })
     }
   },
   watch: {
     async area(val, oldval) {
+      this.manShow = this.womanShow = true;
+      this.man = this.woman = false;
       await this.getPrice();
       this.regionOptionsValue = this.regionOptions.filter(item => item.value == val[0])[0].name;
       await this.totalMoneyFun();
     },
     async channel(val, oldval) {
+      this.manShow = this.womanShow = true;
+      this.man = this.woman = false;
       await this.getPrice();
       this.channelOptionsValue = this.channelOptions.filter(item => item.value == val[0])[0].name;
       await this.totalMoneyFun();
@@ -303,10 +317,12 @@ export default {
       this.totalMoneyFun();
     },
     async man(val, oldval) {
+      if(!val) this.manValue = 0;
       await this.getPrice();
       await this.totalMoneyFun();
     },
     async woman(val, oldval) {
+      if(!val) this.womanValue = 0;
       await this.getPrice();
       await this.totalMoneyFun();
     }
@@ -515,6 +531,10 @@ export default {
       }
     }
   }
+}
+.error {
+  font-size: rem(14);
+  color: red;
 }
 </style>
 

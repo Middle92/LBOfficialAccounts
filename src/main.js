@@ -107,12 +107,12 @@ router.beforeEach((to, form, next) => {
       if(phone && password && role) {
         // 权限 是否跟 cookie 一样
         if(routeRole !== getCookie('role')) {
-          // 如果不等于 跳转 登陆页
+          // 如果不等于 跳转 登录页
           if(routeRole === 'guardian') router.replace({ path: '/Accendant' })
           else if(routeRole === 'advertiser') router.replace({ path: '/Login' })
           return;
         }
-        // 自动登陆获取userinfo
+        // 自动登录获取userinfo
         if(getCookie('role') === 'guardian') url = '/guardian/login'
         if(getCookie('role') === 'advertiser') url = '/advertiser/login'
         store.getters.login(url, {
@@ -121,7 +121,7 @@ router.beforeEach((to, form, next) => {
         },(res) => {
           next()
         })
-      } else { // cookie 手机 密码 权限 就跳转登陆
+      } else { // cookie 手机 密码 权限 就跳转登录
         if(routeRole === 'guardian') router.replace({ path: '/Accendant' })
         else if(routeRole === 'advertiser') router.replace({ path: '/Login' })
       }

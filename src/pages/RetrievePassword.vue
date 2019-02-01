@@ -93,7 +93,7 @@ export default {
           phone,
           code,
           password
-        },
+        }
       }).then(res => {
         if(res) {
           vm.$vux.toast.show({
@@ -138,7 +138,7 @@ export default {
           body: {
             phone,
             imgCode
-          },
+          }
         }).then(res => {
           this.iscode = false;
           let count = 60;

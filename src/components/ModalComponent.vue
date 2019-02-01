@@ -38,6 +38,9 @@ export default {
                     remark
                 }
             }).then(res => {
+                this.isShow = false;
+                this.remark = null;
+                commit.$emit('reset');
             })
         }
     },

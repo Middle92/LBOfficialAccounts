@@ -1,6 +1,6 @@
 <template>
     <div class="conatiner" v-if="data && data.length > 0">
-        <div v-for="(item, index) in data" :key="index" @click="editDate">
+        <div v-for="(item, index) in data" :key="index" @click="editDate(item.id)">
             <span class="time">{{dateFormat(new Date(item.addTime).getTime(), 'YYYY-MM-DD')}}</span>
             <div class="content">
                 <p class="content-title" :class="{'read': !item.dealTime}">{{item.title}}</p>
@@ -54,15 +54,16 @@ export default {
                 this.data = res;
             })
         },
-        editDate() {
+        editDate(id) {
             let { remark } = this
             this.Fetch({
                 url: '/message/editDate.ad',
                 body: {
-                    id: this.userinfo.id
+                    id
                 }
             }).then(res => {
                 console.log(res);
+                this.messageList();
                 // this.data = res;
             })
         }

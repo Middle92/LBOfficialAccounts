@@ -37,8 +37,7 @@ export default {
         }
     },
     data() {
-        return {
-        }
+        return {}
     },
     computed: {
         ...mapGetters(['userinfo'])

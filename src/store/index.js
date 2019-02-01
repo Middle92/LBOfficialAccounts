@@ -18,7 +18,7 @@ const store = new Vuex.Store({
         userinfo(state) {
             return state.userinfo;
         },
-        // 维护人员登陆
+        // 维护人员登录
         login: (state) => (url, body, callback, role) => {
             Fetch({
                 url: url,
@@ -28,9 +28,9 @@ const store = new Vuex.Store({
                 if (res) {
                     if(!res) return;
                     state.userinfo = res;
-                    // 登陆成功后的回调
+                    // 登录成功后的回调
                     vm.$vux.toast.show({
-                        text: '登陆成功',
+                        text: '登录成功',
                         width: '3em',
                         onHide: () => {
                           // 保存账号密码

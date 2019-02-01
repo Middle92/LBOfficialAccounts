@@ -52,25 +52,7 @@ export default {
         }
       ])
       if(!validate) return
-      // this.Fetch({
-      //   url: '/advertiser/login',
-      //   code: true,
-      //   body: {
-      //     phone, 
-      //     password
-      //   }
-      // }, '登录中...').then(res => {
-      //   if(res) {
-      //     this.$store.commit('setUserinfo', res) 
-      //     this.$vux.toast.show({
-      //       text: '登陆成功',
-      //       width: '3em',
-      //       onHide: () => {
-      //         this.$router.replace({ path: '/Home' })
-      //       }
-      //     })
-      //   }
-      // })
+      
       this.login('/advertiser/login', {
         phone,
         password

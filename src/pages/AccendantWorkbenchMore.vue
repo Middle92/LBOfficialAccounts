@@ -14,51 +14,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import dataFormat from '@/utils/date-format';
+import commit from '@/utils/commit';
 export default {
     data() {
         return {
             isshow: false,
-            data: [
-                {
-                    title: '您有一台设备(设备ID:123456789)',
-                    statusText: '待补货',
-                    time: '2018/09/09',
-                    detail: '详情：这里是详情，设备的信息详情之类的，一般不会太多，如果多了可折叠。最多两行。',
-                    status: true
-                }, {
-                    title: '您有一台设备(设备ID:123456789)',
-                    statusText: '待补货',
-                    time: '2018/09/09',
-                    detail: '详情：这里是详情，设备的信息详情之类的，一般不会太多，如果多了可折叠。最多两行。',
-                    status: false
-                },
-                {
-                    title: '您有一台设备(设备ID:123456789)',
-                    statusText: '待补货',
-                    time: '2018/09/09',
-                    detail: '详情：这里是详情，设备的信息详情之类的，一般不会太多，如果多了可折叠。最多两行。',
-                    status: true
-                }, {
-                    title: '您有一台设备(设备ID:123456789)',
-                    statusText: '待补货',
-                    time: '2018/09/09',
-                    detail: '详情：这里是详情，设备的信息详情之类的，一般不会太多，如果多了可折叠。最多两行。',
-                    status: false
-                },
-                {
-                    title: '您有一台设备(设备ID:123456789)',
-                    statusText: '待补货',
-                    time: '2018/09/09',
-                    detail: '详情：这里是详情，设备的信息详情之类的，一般不会太多，如果多了可折叠。最多两行。',
-                    status: true
-                }, {
-                    title: '您有一台设备(设备ID:123456789)',
-                    statusText: '待补货',
-                    time: '2018/09/09',
-                    detail: '详情：这里是详情，设备的信息详情之类的，一般不会太多，如果多了可折叠。最多两行。',
-                    status: false
-                }
-            ]
+            data: []
         }
     },
     methods: {
@@ -94,6 +55,9 @@ export default {
     },
     mounted() {
         this.queryLogList();
+        commit.$on('reset', () => {
+            this.queryLogList()
+        })
     },
     computed: {
         ...mapGetters(['userinfo'])

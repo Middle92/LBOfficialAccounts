@@ -4,7 +4,7 @@
       <div class="content" slot="content">
         <div class="group">
           <label for="username">姓名</label>
-          <input class="gruop-input" v-model="name" id="username" type="text" placeholder="请输入您的姓名">
+          <input class="gruop-input" v-model="name" maxlength="50" d="username" type="text" placeholder="请输入您的姓名">
         </div>
         <div class="group">
           <label for="tel">手机号码</label>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="footer" slot="footer">
-        <router-link to="/Login" class="green center">已有账号，现在登陆 </router-link>
+        <router-link to="/Login" class="green center">已有账号，现在登录 </router-link>
       </div>
     </login-component>
   </div>
