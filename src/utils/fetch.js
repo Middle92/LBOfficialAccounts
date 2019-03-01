@@ -63,7 +63,6 @@ const FetchRace = (options, text='加载中...', timeout = 3000) => {
         Fetch(options, text), 
         new Promise((resolve, rejects) => {
             setTimeout(() => {
-                
                 rejects(new Error('request timeout'))
             }, timeout)
         })
