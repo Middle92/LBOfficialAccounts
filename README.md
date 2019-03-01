@@ -1,4 +1,4 @@
-# vue-lb
+# LB公众号
 
 > A Vue.js project
 
