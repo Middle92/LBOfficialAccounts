@@ -22,6 +22,11 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 build config http://www.cnblogs.com/woshidouzia/p/9345706.html
 
-http://localhost:8080/?state=login#/Login
-
-http://localhost:8080/?state=accendant#/Login
+``` bash
+# 扫码页面
+http://localhost:8080/
+# 广告主端
+http://localhost:8080/?state=login#/
+# 维护人员端
+http://localhost:8080/?state=accendant#/
+```
